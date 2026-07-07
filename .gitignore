@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ENV LOCAL - YOUR SECRET KEYS (already covered by .env* above)
+.env.local

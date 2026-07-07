@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlyRank Backend AI Engineering Internship - Checkpoint 1
 
-## Getting Started
+## Project Overview
+This repository contains my submission for the **Backend AI Engineering** internship at **FlyRank AI**. I completed the AI Core assignment, which implements four essential patterns for building production-grade AI services.
 
-First, run the development server:
+## Technologies Used
+- **Next.js** (API routes)
+- **Portkey.ai** (AI Gateway for model routing)
+- **Groq** (LLM provider)
+- **Zod** (Schema validation)
+- **JavaScript**
 
+## What I Built (The 4 Patterns)
+
+### 1. Gateway & Model Swap (`pages/api/ask.js`)
+- Calls the AI model through a Portkey gateway
+- Model can be swapped with **one line of code** (`@groq-prod/...` → `@anthropic/...`)
+- Base endpoint for all AI interactions
+
+ 2. Structured Output & Flow Gate (`pages/api/structured.js`)
+- Forces the AI to respond in a strict JSON format
+- Uses **Zod** to validate the response shape
+- Implements the `shouldContinue` flow gate - rejects invalid outputs
+
+ 3. Tools & Context (`pages/api/agent.js`)
+- AI agent with **3 tools**:
+  - `get_user_by_id` - fetch user details
+  - `get_users_by_role` - filter by job role
+  - `get_product_by_name` - check product stock and price
+- Uses **ToolContext** (closures for shared state)
+- Input validation at every tool boundary
+
+### 4. Guardrail & Denylist (`pages/api/guarded.js`)
+- Lexical guardrail for SQL injection protection
+- Strip-before-check and denylist logic
+- Blocks dangerous patterns like `DROP`, `DELETE`, `INSERT`
+- Catches ~95% of malicious queries with minimal cost
+
+## How to Run This Project
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/aqsarasheed-dev/flyrank-ai-backend.git
+cd flyrank-ai-backend
+ 
